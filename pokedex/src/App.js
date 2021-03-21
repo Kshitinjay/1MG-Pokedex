@@ -23,14 +23,12 @@ function App() {
   };
 
   useEffect(() => {
-    async function fetchData() {
-      let response = await getAllPokemon(initialUrl);
-      setNextUrl(response.next);
-      setPrevUrl(response.previous);
-      await loadingPokemon(response.results);
-      setLoading(false);
-    }
-    fetchData();
+    fetch("https://pokeapi.co/api/v2/pokemon?&limit=200")
+      .then((res) => res.json())
+      .then((data) => {
+        loadingPokemon(data.results);
+        setLoading(false);
+      });
   }, []);
 
   const loadingPokemon = async (data) => {
@@ -42,7 +40,6 @@ function App() {
     );
     setPokemonData(pokemonData);
   };
-  // console.log(pokemonData);
 
   const handleClick = (id) => {
     console.log(id);
@@ -60,7 +57,12 @@ function App() {
               <ul>
                 {pokemonData.slice(page.start, page.end).map((elem, i) => {
                   return (
-                    <li className="list-item" key={i} id={elem.id} onClick={() => handleClick(elem.id)}>
+                    <li
+                      className="list-item"
+                      key={i}
+                      id={elem.id}
+                      onClick={() => handleClick(elem.id)}
+                    >
                       {elem.name}
                     </li>
                   );
