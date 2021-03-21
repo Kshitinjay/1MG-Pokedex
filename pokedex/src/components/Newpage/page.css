@@ -1,0 +1,19 @@
+h1 {
+  text-align: center;
+}
+p {
+  margin-left: 5%;
+}
+img {
+  height: 150px;
+  width: 150px;
+  margin-left: 5%;
+}
+.pokemon-details {
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  position: fixed;
+}
