@@ -10,8 +10,8 @@ function App() {
   const [prevUrl, setPrevUrl] = useState("");
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(0);
-  const initialUrl = "https://pokeapi.co/api/v2/pokemon?&limit=100";
-  const [showPerPage, setShowPerPage] = useState(4);
+  const initialUrl = "https://pokeapi.co/api/v2/pokemon?&limit=200";
+  const [showPerPage, setShowPerPage] = useState(10);
   const [page, setPage] = useState({
     start: 0,
     end: showPerPage,
@@ -42,7 +42,7 @@ function App() {
     );
     setPokemonData(pokemonData);
   };
-  console.log(pokemonData);
+  // console.log(pokemonData);
 
   const handleClick = (id) => {
     console.log(id);
@@ -60,7 +60,7 @@ function App() {
               <ul>
                 {pokemonData.slice(page.start, page.end).map((elem, i) => {
                   return (
-                    <li className="list-item" key={i} id={i} onClick={() => handleClick(i)}>
+                    <li className="list-item" key={i} id={elem.id} onClick={() => handleClick(elem.id)}>
                       {elem.name}
                     </li>
                   );
