@@ -23,12 +23,13 @@ function App() {
   };
 
   useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon?&limit=200")
-      .then((res) => res.json())
-      .then((data) => {
-        loadingPokemon(data.results);
-        setLoading(false);
-      });
+    async function fetchData() {
+      let response = await getAllPokemon(initialUrl);
+      let pokemon = await loadingPokemon(response.results);
+      console.log(pokemon);
+      setLoading(false);
+    }
+    fetchData();
   }, []);
 
   const loadingPokemon = async (data) => {
@@ -40,7 +41,7 @@ function App() {
     );
     setPokemonData(pokemonData);
   };
-
+  console.log(pokemonData);
   const handleClick = (id) => {
     console.log(id);
     setShow(id);
